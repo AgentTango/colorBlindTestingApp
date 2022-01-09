@@ -2,6 +2,8 @@
 
 import 'package:colorblindtestapp/controllers/login_controller.dart';
 import 'package:colorblindtestapp/pages/about_page.dart';
+import 'package:colorblindtestapp/pages/test_page.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -9,6 +11,7 @@ import 'package:get/get.dart';
 class LandingPage extends StatelessWidget {
   LandingPage({Key? key}) : super(key: key);
   final loginController = Get.put(LoginController());
+
   String greeting() {
     var hour = DateTime.now().hour;
     if (hour < 12) {
@@ -56,7 +59,7 @@ class LandingPage extends StatelessWidget {
               leading: Icon(Icons.info),
               title: Text('About Chroma'),
               onTap: () {
-                Navigator.of(context).push(MaterialPageRoute(
+                Navigator.of(context).push(CupertinoPageRoute(
                     builder: (BuildContext context) => AboutPage()));
               },
             ),
@@ -105,16 +108,23 @@ class LandingPage extends StatelessWidget {
             Container(height: 16),
             RichText(
               text: TextSpan(
-                style: Theme.of(context).textTheme.bodyText2?.copyWith(fontSize: 16),
-                children: [
-                  TextSpan(text: "You will be allowed to take the test "),
-                  TextSpan(text: "once",style: TextStyle(decoration: TextDecoration.underline)),
-                  TextSpan(text: ", after which the results will be displayed.")
-                ]
-              ),
+                  style: Theme.of(context)
+                      .textTheme
+                      .bodyText2
+                      ?.copyWith(fontSize: 16),
+                  children: [
+                    TextSpan(text: "You will be allowed to take the test "),
+                    TextSpan(
+                        text: "once",
+                        style: TextStyle(decoration: TextDecoration.underline)),
+                    TextSpan(
+                        text: ", after which the results will be displayed.")
+                  ]),
             ),
             Container(height: 24),
-            ElevatedButton(onPressed: (){}, child: Text("Start Test"))
+            ElevatedButton(onPressed: () {
+              Navigator.of(context).push(CupertinoPageRoute(builder: (BuildContext buildContext)=>TestPage()));
+            }, child: Text("Start Test"))
           ],
         ),
       ),
