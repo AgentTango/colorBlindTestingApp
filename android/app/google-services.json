@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "400745003112",
+    "project_id": "colorblindtestapp-b52a3",
+    "storage_bucket": "colorblindtestapp-b52a3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:400745003112:android:c1b20d702191eb85ace3dd",
+        "android_client_info": {
+          "package_name": "com.createdbytango.colorblindtestapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "400745003112-f96d66nccott45oj1va1b3td4de862tv.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.createdbytango.colorblindtestapp",
+            "certificate_hash": "aaa2413dd6eb53aa751e3b34c84783b1b8b7088a"
+          }
+        },
+        {
+          "client_id": "400745003112-isb2ev2itu4of9j6qjlll8nom32468tc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBWuZvIDPgsrJ_fHluhQlrI6L61_cg2ze8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "400745003112-isb2ev2itu4of9j6qjlll8nom32468tc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

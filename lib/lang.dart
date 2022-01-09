@@ -1,0 +1,3 @@
+// Text("Welcome to Color Blind Test App"),
+// Text("Here we will test for different types of color blindness using this App. You can only give this test a few times, so make sure of the following : "),
+// Text("1. Your phone should be at full brightness.\n2. There should be ample amount of natural light.\n3. Make sure there is enough battery.\n4. And, lastly, that you are connected to the internet throughout the test.")
