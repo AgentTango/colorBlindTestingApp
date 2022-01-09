@@ -33,7 +33,8 @@ class LandingPage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   CircleAvatar(
-                    child: Image.network("${loginController.currentUser.value?.photoUrl}"),
+                    child: Image.network(
+                        "${loginController.currentUser.value?.photoUrl}"),
                   ),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -53,33 +54,67 @@ class LandingPage extends StatelessWidget {
             ),
             ListTile(
               leading: Icon(Icons.info),
-              title: Text('About Test'),
-              onTap: (){
-                Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context)=>AboutPage()));
+              title: Text('About Chroma'),
+              onTap: () {
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (BuildContext context) => AboutPage()));
               },
             ),
             ListTile(
               leading: Icon(Icons.power_settings_new),
               title: Text('Exit'),
-              onTap: (){
+              onTap: () {
                 SystemNavigator.pop();
               },
             ),
             ListTile(
               leading: Icon(Icons.account_circle),
               title: Text('Sign Out'),
-              onTap: (){
+              onTap: () {
                 loginController.signOut();
               },
             ),
           ],
         ),
       ),
-      body: Container(
+      appBar: AppBar(
+        backgroundColor: Colors.black,
+        title: Text("Chroma"),
+        centerTitle: true,
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text("Name is : ${loginController.currentUser.value?.displayName}"),
-            Text("Email is : ${loginController.currentUser.value?.email}")
+            Container(height: 16),
+            Text(
+              "Welcome to Chroma",
+              style: Theme.of(context).textTheme.headline4,
+            ),
+            Container(height: 16),
+            Text(
+              "Here we will test for different types of color blindness using this App. Make sure of the following : ",
+              style: Theme.of(context).textTheme.bodyText2,
+            ),
+            Container(height: 16),
+            Text(
+              "1. Your phone should be at full brightness.\n2. There should be ample amount of natural light.\n3. Make sure there is enough battery.\n4. And, lastly, that you are connected to the internet throughout the test.",
+              style: Theme.of(context).textTheme.bodyText1,
+            ),
+            Container(height: 16),
+            RichText(
+              text: TextSpan(
+                style: Theme.of(context).textTheme.bodyText2?.copyWith(fontSize: 16),
+                children: [
+                  TextSpan(text: "You will be allowed to take the test "),
+                  TextSpan(text: "once",style: TextStyle(decoration: TextDecoration.underline)),
+                  TextSpan(text: ", after which the results will be displayed.")
+                ]
+              ),
+            ),
+            Container(height: 24),
+            ElevatedButton(onPressed: (){}, child: Text("Start Test"))
           ],
         ),
       ),
