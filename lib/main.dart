@@ -1,6 +1,6 @@
 // ignore_for_file: prefer_const_constructors
 
-import 'package:colorblindtestapp/pages/landing.dart';
+import 'package:colorblindtestapp/pages/landing_page.dart';
 import 'package:colorblindtestapp/pages/welcome_page.dart';
 import 'dart:async';
 import 'dart:convert' show json;

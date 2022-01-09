@@ -1,7 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:colorblindtestapp/controllers/login_controller.dart';
-import 'package:colorblindtestapp/pages/landing.dart';
+import 'package:colorblindtestapp/pages/landing_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
