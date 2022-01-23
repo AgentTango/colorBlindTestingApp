@@ -1,8 +1,11 @@
 // ignore_for_file: prefer_const_constructors
 
-import 'package:flutter/cupertino.dart';
+import 'package:colorblindtestapp/controllers/user_data_controller.dart';
+import 'package:colorblindtestapp/models/test_data_model.dart';
+import 'package:colorblindtestapp/pages/blind_test.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 
 class TestPage extends StatelessWidget {
   const TestPage({Key? key}) : super(key: key);
@@ -37,6 +40,10 @@ class _buildFormBodyState extends State<_buildFormBody> {
   bool _enableSubmitButton = false;
   var _obscureText = false;
   bool _startAutoValidation = false;
+  TextEditingController _nameController = TextEditingController();
+  TextEditingController _ageController = TextEditingController();
+  TextEditingController _phoneController = TextEditingController();
+  TextEditingController _passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +52,9 @@ class _buildFormBodyState extends State<_buildFormBody> {
       child: SingleChildScrollView(
         child: Form(
           key: _formKey,
-          autovalidateMode: _startAutoValidation?AutovalidateMode.always:AutovalidateMode.disabled,
+          autovalidateMode: _startAutoValidation
+              ? AutovalidateMode.always
+              : AutovalidateMode.disabled,
           onChanged: () {
             setState(() {
               _enableSubmitButton = true;
@@ -55,21 +64,28 @@ class _buildFormBodyState extends State<_buildFormBody> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               TextFormField(
+                  controller: _nameController,
                   decoration: InputDecoration(labelText: "Name *"),
                   initialValue: null,
                   validator: (String? value) {
-                    return (value == null||value.isEmpty) ? "Cannot be empty" : null;
+                    return (value == null || value.isEmpty)
+                        ? "Cannot be empty"
+                        : null;
                   }),
               Container(height: 16),
               TextFormField(
+                  controller: _ageController,
                   decoration: InputDecoration(labelText: "Age *"),
                   initialValue: null,
                   keyboardType: TextInputType.number,
                   validator: (String? value) {
-                    return (value == null||value.isEmpty) ? "Cannot be empty" : null;
+                    return (value == null || value.isEmpty)
+                        ? "Cannot be empty"
+                        : null;
                   }),
               Container(height: 16),
               TextFormField(
+                controller: _phoneController,
                 maxLengthEnforcement: MaxLengthEnforcement.enforced,
                 initialValue: null,
                 onChanged: (String? value) {
@@ -86,6 +102,7 @@ class _buildFormBodyState extends State<_buildFormBody> {
               ),
               Container(height: 16),
               TextFormField(
+                  controller: _passwordController,
                   keyboardType: TextInputType.text,
                   obscureText: _obscureText,
                   initialValue: null,
@@ -101,10 +118,11 @@ class _buildFormBodyState extends State<_buildFormBody> {
                               ? Icons.visibility_off
                               : Icons.visibility))),
                   validator: (String? value) {
-                    return (value == null||value.isEmpty) ? "Cannot be empty" : null;
+                    return (value == null || value.isEmpty)
+                        ? "Cannot be empty"
+                        : null;
                   }),
               Container(height: 16),
-
               ElevatedButton(
                   onPressed:
                       _enableSubmitButton ? () => submitButtonEvent() : null,
@@ -117,9 +135,17 @@ class _buildFormBodyState extends State<_buildFormBody> {
   }
 
   void submitButtonEvent() {
-    _formKey.currentState?.validate();
-    setState(() {
-      _startAutoValidation = true;
-    });
+    if (_formKey.currentState!.validate()) {
+      UserData user = UserData(
+          age: int.parse(_ageController.text),
+          name: _nameController.text,
+          phone: _phoneController.text,
+          password: _passwordController.text);
+      UserDataController userDataController =
+          UserDataController(userData: user);
+      Get.create<UserDataController>(() => userDataController,
+          tag: "CurrentUser");
+      Get.to(BlindTest());
+    }
   }
 }

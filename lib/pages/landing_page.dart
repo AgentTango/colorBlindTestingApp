@@ -2,6 +2,7 @@
 
 import 'package:colorblindtestapp/controllers/login_controller.dart';
 import 'package:colorblindtestapp/pages/about_page.dart';
+import 'package:colorblindtestapp/pages/blind_test.dart';
 import 'package:colorblindtestapp/pages/test_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -55,14 +56,16 @@ class LandingPage extends StatelessWidget {
                   TextSpan(
                       text: "once",
                       style: TextStyle(decoration: TextDecoration.underline)),
-                  TextSpan(
-                      text: ", after which the results will be displayed.")
+                  TextSpan(text: ", after which the results will be displayed.")
                 ]),
           ),
           Container(height: 24),
-          ElevatedButton(onPressed: () {
-            Navigator.of(context).push(CupertinoPageRoute(builder: (BuildContext buildContext)=>TestPage()));
-          }, child: Text("Start Test"))
+          ElevatedButton(
+              onPressed: () {
+                Navigator.of(context).push(CupertinoPageRoute(
+                    builder: (BuildContext buildContext) => TestPage()));
+              },
+              child: Text("Start Test"))
         ],
       ),
     );
