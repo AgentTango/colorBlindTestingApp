@@ -24,59 +24,59 @@ class _ShowImageCarouselState extends State<ShowImageCarousel> {
     final maxLength = widget.listResult.items.length;
     return SafeArea(
       child: Scaffold(
-          bottomSheet: Container(
-            height: 56,
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: ListView.builder(
-              shrinkWrap: true,
-              scrollDirection: Axis.horizontal,
-              itemBuilder: (context, index) => Obx(() {
-                return Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: InkWell(
-                    onTap: () {
-                      controller.jumpToPage(index,
-                        );
-                    },
-                    child: Container(
-                      decoration: BoxDecoration(
-                        border: Border.all(color: Colors.redAccent, width: 1.5),
-                        borderRadius: BorderRadius.circular(100),
-                        color: page_index.value == index
-                            ? Colors.redAccent
-                            : Colors.transparent,
-                      ),
-                      child: CircleAvatar(
-                        backgroundColor: Colors.transparent,
-                        child: Text(
-                          index.toString(),
-                          style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
-                              color: page_index.value == index
-                                  ? Colors.white
-                                  : Colors.black),
-                        ),
-                      ),
-                    ),
-                  ),
-                );
-              }),
-              itemCount: maxLength,
-            ),
-          ),
+          // bottomSheet: Container(
+          //   height: 56,
+          //   padding: const EdgeInsets.symmetric(horizontal: 16),
+          //   child: ListView.builder(
+          //     shrinkWrap: true,
+          //     scrollDirection: Axis.horizontal,
+          //     itemBuilder: (context, index) => Obx(() {
+          //       return Padding(
+          //         padding: const EdgeInsets.all(8.0),
+          //         child: InkWell(
+          //           onTap: () {
+          //             controller.jumpToPage(index,
+          //               );
+          //           },
+          //           child: Container(
+          //             decoration: BoxDecoration(
+          //               border: Border.all(color: Colors.redAccent, width: 1.5),
+          //               borderRadius: BorderRadius.circular(100),
+          //               color: page_index.value == index
+          //                   ? Colors.redAccent
+          //                   : Colors.transparent,
+          //             ),
+          //             child: CircleAvatar(
+          //               backgroundColor: Colors.transparent,
+          //               child: Text(
+          //                 index.toString(),
+          //                 style: TextStyle(
+          //                     fontSize: 16,
+          //                     fontWeight: FontWeight.bold,
+          //                     color: page_index.value == index
+          //                         ? Colors.white
+          //                         : Colors.black),
+          //               ),
+          //             ),
+          //           ),
+          //         ),
+          //       );
+          //     }),
+          //     itemCount: maxLength,
+          //   ),
+          // ),
           body: PageView.builder(
-            controller: controller
-              ..addListener(() {
-                page_index.value = controller.page!.toInt();
-              }),
-            itemCount: maxLength,
-            physics: const NeverScrollableScrollPhysics(),
-            itemBuilder: (context, index) {
-              final item = widget.listResult.items[index];
-              return ShowImageCard(item, controller, testDataController,maxLength);
-            },
-          )),
+        controller: controller
+          ..addListener(() {
+            page_index.value = controller.page!.toInt();
+          }),
+        itemCount: maxLength,
+        physics: const NeverScrollableScrollPhysics(),
+        itemBuilder: (context, index) {
+          final item = widget.listResult.items[index];
+          return ShowImageCard(item, controller, testDataController, maxLength);
+        },
+      )),
     );
   }
 }
