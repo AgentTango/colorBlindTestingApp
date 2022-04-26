@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "400745003112-ak0dvuibtcjofiimdmbtkpsd5me2s6qj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.createdbytango.colorblindtestapp",
+            "certificate_hash": "fcb3dc7a6c99ec4800bc16d9e200eb62749d1445"
+          }
+        },
+        {
           "client_id": "400745003112-eg1llg2h2stuie9ig66ocme380c7ufoh.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

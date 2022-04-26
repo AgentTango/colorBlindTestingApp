@@ -90,28 +90,28 @@ class _ShowImageDetailState extends State<ShowImageCard> {
                     ),
                   );
                 }),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  // ignore: sized_box_for_whitespace
-                  child: Container(
-                    width: 204,
-                    height: 40,
-                    child: ElevatedButton(
-                      onPressed: () {
-                        if (textEditingController.text.isNotEmpty) {
-                          widget.testDataController.results[widget.item.name] =
-                              textEditingController.text;
-                          Get.snackbar("Saved", "Number is Saved",
-                              duration: Duration(milliseconds: 1200),
-                              backgroundColor: Colors.white,
-                              snackPosition: SnackPosition.BOTTOM);
-                        }
-                      },
-                      child: const Text("Save"),
-                      style: ElevatedButton.styleFrom(primary: Colors.green),
-                    ),
-                  ),
-                ),
+                // Padding(
+                //   padding: const EdgeInsets.all(8.0),
+                //   // ignore: sized_box_for_whitespace
+                //   child: Container(
+                //     width: 204,
+                //     height: 40,
+                //     child: ElevatedButton(
+                //       onPressed: () {
+                //         if (textEditingController.text.isNotEmpty) {
+                //           widget.testDataController.results[widget.item.name] =
+                //               textEditingController.text;
+                //           Get.snackbar("Saved", "Number is Saved",
+                //               duration: Duration(milliseconds: 1200),
+                //               backgroundColor: Colors.white,
+                //               snackPosition: SnackPosition.BOTTOM);
+                //         }
+                //       },
+                //       child: const Text("Save"),
+                //       style: ElevatedButton.styleFrom(primary: Colors.green),
+                //     ),
+                //   ),
+                // ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   // ignore: sized_box_for_whitespace
@@ -160,41 +160,92 @@ class _ShowImageDetailState extends State<ShowImageCard> {
                       child: FloatingActionButton.extended(
                         onPressed: isLastPage
                             ? () {
-                                Get.dialog(
-                                  AlertDialog(
-                                    title: const Text("Submit This Data?"),
-                                    //content: const Text("You can't go back"),
-                                    actions: [
-                                      OutlinedButton(
-                                        style: OutlinedButton.styleFrom(
-                                            side: BorderSide(width: 1.5)),
-                                        onPressed: () {
-                                          Get.back();
-                                        },
-                                        child: const Text("Cancel"),
+                                widget.testDataController.showData();
+                                if (textEditingController.text.isNotEmpty) {
+                                  widget.testDataController
+                                          .results[widget.item.name] =
+                                      textEditingController.text;
+                                  Get.snackbar("Saved", "All Inputs are Saved",
+                                      duration: Duration(milliseconds: 1200),
+                                      backgroundColor: Colors.white,
+                                      colorText: Colors.green,
+                                      icon: Icon(
+                                        Icons.check_box,
+                                        color: Colors.green,
                                       ),
-                                      Padding(
-                                        padding: const EdgeInsets.symmetric(
-                                            horizontal: 16),
-                                        child: ElevatedButton(
+                                      snackPosition: SnackPosition.BOTTOM);
+                                  Get.dialog(
+                                    AlertDialog(
+                                      title: const Text("Submit This Data?"),
+                                      //content: const Text("You can't go back"),
+                                      actions: [
+                                        OutlinedButton(
+                                          style: OutlinedButton.styleFrom(
+                                              side: BorderSide(width: 1.5)),
                                           onPressed: () {
-                                            submitData();
+                                            Get.back();
                                           },
-                                          child: Padding(
-                                            padding: const EdgeInsets.symmetric(
-                                                horizontal: 12),
-                                            child: const Text("Save"),
+                                          child: const Text("Cancel"),
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 16),
+                                          child: ElevatedButton(
+                                            onPressed: () {
+                                              submitData();
+                                            },
+                                            child: Padding(
+                                              padding:
+                                                  const EdgeInsets.symmetric(
+                                                      horizontal: 12),
+                                              child: const Text("Save"),
+                                            ),
                                           ),
                                         ),
+                                      ],
+                                    ),
+                                  );
+                                } else {
+                                  Get.snackbar("Error", "Please enter a number",
+                                      duration: Duration(milliseconds: 1200),
+                                      backgroundColor: Colors.white,
+                                      colorText: Colors.red,
+                                      icon: Icon(
+                                        Icons.warning,
+                                        color: Colors.red,
                                       ),
-                                    ],
-                                  ),
-                                );
+                                      snackPosition: SnackPosition.BOTTOM);
+                                }
                               }
                             : () {
-                                widget.pageController.nextPage(
-                                    duration: const Duration(milliseconds: 200),
-                                    curve: Curves.easeInOut);
+                                if (textEditingController.text.isNotEmpty) {
+                                  widget.testDataController
+                                          .results[widget.item.name] =
+                                      textEditingController.text;
+                                  Get.snackbar("Saved", "Input was Saved",
+                                      duration: Duration(milliseconds: 1200),
+                                      backgroundColor: Colors.white,
+                                      colorText: Colors.green,
+                                      icon: Icon(
+                                        Icons.check_box,
+                                        color: Colors.green,
+                                      ),
+                                      snackPosition: SnackPosition.BOTTOM);
+                                  widget.pageController.nextPage(
+                                      duration:
+                                          const Duration(milliseconds: 200),
+                                      curve: Curves.easeInOut);
+                                } else {
+                                  Get.snackbar("Error", "Please enter a number",
+                                      duration: Duration(milliseconds: 1200),
+                                      backgroundColor: Colors.white,
+                                      colorText: Colors.red,
+                                      icon: Icon(
+                                        Icons.warning,
+                                        color: Colors.red,
+                                      ),
+                                      snackPosition: SnackPosition.BOTTOM);
+                                }
                               },
                         heroTag: const Text("Next"),
                         label: isLastPage ? Text("Submit") : Text("Next"),
@@ -210,7 +261,8 @@ class _ShowImageDetailState extends State<ShowImageCard> {
       },
     ));
   }
-  Future<void> submitData()async{
+
+  Future<void> submitData() async {
     await widget.testDataController.submitData();
     Get.back();
   }
